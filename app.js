@@ -4,6 +4,13 @@ app.use(express.json());
 
 const users = ["John", "Mark"];
 
+const logUsers = (req, res, next) => {
+    console.log(users);
+    next();
+}
+
+app.use(logUsers);
+
 app.get("/users", (req, res, next) => {
   res.json(users);
 });
