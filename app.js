@@ -49,6 +49,13 @@ app.post("/users/create", (req, res) => {
     res.json("User added successfully");
 })
 
+app.put("/products/update", (req, res) => {
+    products.shift();
+    products.push(req.body.item);
+    console.log(products);
+    res.json("Updated successfully");
+})
+
 app.use((error, req, res, next) => {
     res.json("No users");
 });
