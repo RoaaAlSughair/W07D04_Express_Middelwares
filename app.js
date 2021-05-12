@@ -26,6 +26,13 @@ router.use((req, res, next) => {
     next();
 });
 
+router.use((req, res, next) => {
+    if (req.body) {
+    console.log(req.body);
+    next();
+    }
+})
+
 app.use(logUsers);
 app.use(logMethod);
 app.use("/users", router);
@@ -33,6 +40,11 @@ app.use("/users", router);
 app.get("/users", (req, res, next) => {
   res.json(users);
 });
+
+app.post("/users/create", (req, res) => {
+    users.push(req.body.name);
+    res.json("User added successfully");
+})
 
 app.use((error, req, res, next) => {
     res.json("No users");
