@@ -2,8 +2,10 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 const router = express.Router();
+const router2 = express.Router();
 
 const users = ["John", "Mark"];
+const products = ["Keyboard", "Mouse"];
 
 const logUsers = (req, res, next) => {
     if (users.length !== 0) {
@@ -26,7 +28,7 @@ router.use((req, res, next) => {
     next();
 });
 
-router.use((req, res, next) => {
+router.use("/create",(req, res, next) => {
     if (req.body) {
     console.log(req.body);
     next();
@@ -36,6 +38,7 @@ router.use((req, res, next) => {
 app.use(logUsers);
 app.use(logMethod);
 app.use("/users", router);
+app.use("/products", router2);
 
 app.get("/users", (req, res, next) => {
   res.json(users);
