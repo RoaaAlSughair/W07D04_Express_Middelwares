@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
+const router = express.Router();
 
 const users = ["John", "Mark"];
 
@@ -16,12 +17,18 @@ const logUsers = (req, res, next) => {
 }
 
 const logMethod = (req, res, next) => {
-    console.log("GET");
+    console.log(req.method);
     next();
 }
 
+router.use((req, res, next) => {
+    console.log("Directing to users");
+    next();
+});
+
 app.use(logUsers);
 app.use(logMethod);
+app.use("/users", router);
 
 app.get("/users", (req, res, next) => {
   res.json(users);
