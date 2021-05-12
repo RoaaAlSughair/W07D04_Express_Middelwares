@@ -36,9 +36,9 @@ router.use("/create", (req, res, next) => {
 });
 
 router2.use((req, res, next) => {
-    console.log(req.url);
-    next();
-})
+  console.log(req.url);
+  next();
+});
 
 app.use(logUsers);
 app.use(logMethod);
@@ -65,7 +65,9 @@ app.use((error, req, res, next) => {
   res.json("No users");
 });
 
-app.use((error, req, res, next) => {});
+app.use((error, req, res, next) => {
+  // if (req.url) {}
+});
 
 const PORT = 3000;
 app.listen(PORT, () => {
